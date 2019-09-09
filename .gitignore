@@ -1,7 +1,8 @@
 chain.js
 link.js
-linked_list.js
-queue.js
+linked_list2.js
+queue2.js
 tree.js
 coverage
 node_modules
+.gitignore

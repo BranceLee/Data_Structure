@@ -1,8 +1,12 @@
 {
   "scripts": {
-    "test": "jest --env=node"
+    "test": "jest --env=node",
+    "fmt": "prettier --single-quote  --trailing-comma \"all\" --write \"**/*.{js,jsx}\""
   },
   "dependencies": {
     "jest": "24.9.0"
+  },
+  "devDependencies": {
+    "prettier": "1.18.2"
   }
 }

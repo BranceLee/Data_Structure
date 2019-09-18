@@ -1,4 +1,4 @@
-const { Blockchain, Block } = require('../data_structures/linked_list');
+const { Blockchain, Block } = require('../linked_list');
 
 describe('Test the linked list', () => {
   it('Test create blockchain should be empty', () => {

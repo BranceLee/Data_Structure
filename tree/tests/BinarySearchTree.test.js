@@ -9,5 +9,6 @@ describe('BinarySearchTree', () => {
     expect(bst.left).toBe(null);
     expect(bst.right).toBe(null);
     expect(bst.parent).toBe(null);
+    expect(bst.value).toBe(null);
   });
 });

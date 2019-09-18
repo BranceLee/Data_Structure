@@ -1,4 +1,4 @@
-const Queue = require('../data_structures/queue');
+const Queue = require('../queue');
 
 describe('Test the queue', () => {
   it('Test create queue should be empty', () => {

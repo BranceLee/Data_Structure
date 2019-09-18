@@ -1,4 +1,4 @@
-const { Blockchain } = require('./linked_list');
+const { Blockchain } = require('../linked_list/linked_list');
 
 class Queue {
   constructor() {

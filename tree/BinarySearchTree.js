@@ -1,4 +1,4 @@
-class BinarySearchTreeNode {
+class BinaryTreeNode {
   constructor(value = null) {
     this.left = null;
     this.right = null;
@@ -32,36 +32,10 @@ class BinarySearchTreeNode {
     }
     return this;
   }
-
-  findMin() {
-    if (!this.left) {
-      return this;
-    }
-    this.findMin(this.left);
-  }
-
-  replaceNode(newNode = null) {
-    const parent = this.parent;
-    if (!parent) {
-      newNode.parent = null;
-      this.left = newNode.left;
-      this.right = newNode.right;
-      this.value = newNode.value;
-    }
-    if (parent.left && parent.left.value === this.value) {
-      parent.left = newNode;
-      return true;
-    }
-    if (parent.right && parent.right.value === this.value) {
-      parent.right = newNode;
-      return true;
-    }
-    return false;
-  }
 }
 
 // 以节点为单元递归操作
-class BinarySearchTree extends BinarySearchTreeNode {
+class BinarySearchTreeNode extends BinaryTreeNode {
   constructor(value) {
     super(value);
   }
@@ -77,12 +51,15 @@ class BinarySearchTree extends BinarySearchTreeNode {
       this.value = value;
       return this;
     }
+    if (this.value === value) {
+      return false;
+    }
     if (value < this.value) {
       if (this.left) {
         return this.left.insert(value);
       }
       const newNode = new BinarySearchTreeNode(value);
-      this.left = newNode;
+      this.setLeft(newNode);
       return newNode;
     }
     if (this.value < value) {
@@ -90,7 +67,7 @@ class BinarySearchTree extends BinarySearchTreeNode {
         return this.right.insert(value);
       }
       const newNode = new BinarySearchTreeNode(value);
-      this.right = newNode;
+      this.setRight(newNode);
       return newNode;
     }
     return this;
@@ -135,7 +112,7 @@ class BinarySearchTree extends BinarySearchTreeNode {
       /** 若不存在比右子节点还小的后代节点，最小的节点就只能是右子节点 */
       if (nextBiggerNode === target.right) {
         // target.right.left is null, here
-        target.right = target.right.right;
+        target.setRight(target.right.right);
         target.value = target.right.value;
       } else {
         /**  存在比右子键点还小的后代节点 */
@@ -148,6 +125,32 @@ class BinarySearchTree extends BinarySearchTreeNode {
     }
     return true;
   }
+
+  findMin() {
+    if (!this.left) {
+      return this;
+    }
+    this.findMin(this.left);
+  }
+
+  replaceNode(newNode = null) {
+    const parent = this.parent;
+    if (!parent) {
+      newNode.parent = null;
+      this.left = newNode.left;
+      this.right = newNode.right;
+      this.value = newNode.value;
+    }
+    if (parent.left && parent.left.value === this.value) {
+      parent.setLeft(newNode);
+      return true;
+    }
+    if (parent.right && parent.right.value === this.value) {
+      parent.setRight(newNode);
+      return true;
+    }
+    return false;
+  }
 }
 
-module.exports = { BinarySearchTree, BinarySearchTreeNode };
+module.exports = { BinaryTreeNode, BinarySearchTreeNode };

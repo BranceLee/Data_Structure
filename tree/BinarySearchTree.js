@@ -103,22 +103,22 @@ class BinarySearchTreeNode extends BinaryTreeNode {
    *
    */
   remove(value) {
-    const target = this.findNode(this,value);
+    const target = this.findNode(this, value);
     if (!target) {
       throw new Error('Node no be found');
     }
-    if(!target.left && !target.right){
-      if(!target.parent){
+    if (!target.left && !target.right) {
+      if (!target.parent) {
         target.value = null;
-        return true
+        return true;
       }
-      if(target === target.parent.left){
+      if (target === target.parent.left) {
         target.parent.left = null;
       }
-      if(target === target.parent.right){
+      if (target === target.parent.right) {
         target.parent.right = null;
       }
-      return true
+      return true;
     }
     if (target.left && target.right) {
       const nextBiggerNode = target.right.findMin();
@@ -146,21 +146,21 @@ class BinarySearchTreeNode extends BinaryTreeNode {
     return this.findMin(root.left);
   }
 
-  findMax(root){
-    if(!root.right){
-      return root
+  findMax(root) {
+    if (!root.right) {
+      return root;
     }
-    return this.findMax(root.right)
+    return this.findMax(root.right);
   }
 
   replaceNode(newNode) {
     const parent = this.parent;
-    if (!parent ) {
+    if (!parent) {
       newNode.parent = null;
       this.left = newNode.left;
       this.right = newNode.right;
       this.value = newNode.value;
-      return true
+      return true;
     }
     if (parent.left && parent.left.value === this.value) {
       parent.setLeft(newNode);

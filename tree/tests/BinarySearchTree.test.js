@@ -22,6 +22,7 @@ const testCases = [
   [0, -1],
   [0, 1],
   [0, 1, 2],
+  [0, -1, -1],
   [0, -1, -2],
   [0, 1, -1],
   [0, 1, -1, 2],
@@ -38,30 +39,43 @@ describe('BinarySearchTree', () => {
     expect(bst.value).toBeNull();
   });
 
-  it('Inserting value, it should be in bst order', () => {
-    // const testCases = randArrays()
+  it('should insert all style param', () => {
+    const testCase = [1, 'name', true, undefined, null, [], { name: 'alice' }];
+    testCase.forEach(value => {
+      const bst = new BinarySearchTreeNode();
+      bst.insert(value);
+      expect(bst.value).toBe(value);
+    });
+  });
+
+  it('should insert value by bst order', () => {
     testCases.forEach(tc => {
       const bst = new BinarySearchTreeNode();
       tc.forEach(value => {
         const newNode = bst.insert(value);
+        // case 相同插入相同参的时候
         if (!newNode) {
           expect(newNode).toBe(false);
           return;
         }
+        // case在 Root 位置插入值
         if (!newNode.parent) {
           expect(newNode).toBe(bst);
           expect(newNode.left).toBe(null);
           expect(newNode.right).toBe(null);
           return;
         }
-        if (newNode.parent.value === value) {
-          expect(newNode.parent).toBe(null);
-        }
+        // case 在左边插入
         if (newNode.parent.value > value) {
+          expect(newNode.value).toBe(value);
           expect(newNode.parent.left).toBe(newNode);
+          return;
         }
+        // case 在右边插入
         if (newNode.parent.value < value) {
+          expect(newNode.value).toBe(value);
           expect(newNode.parent.right).toBe(newNode);
+          return;
         }
       });
     });

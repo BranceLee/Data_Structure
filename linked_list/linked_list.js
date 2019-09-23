@@ -28,7 +28,12 @@ class Blockchain {
     return node;
   }
 
-  // 时间复杂度O(n)
+  /**
+   * @param {number} index
+   * @return {Block}
+   * 时间复杂度O(n)
+   */
+
   removeAtIndex(index) {
     if (!this.head) {
       throw new Error('Blockchain is null');
@@ -36,26 +41,35 @@ class Blockchain {
     if (index >= this.size || index < 0) {
       throw new Error('Index out of bounds');
     }
-
+    let deleteNode = null;
     if (index === 0) {
+      deleteNode = this.head;
       if (this.size === 1) {
         this.head = this.tail = null;
       } else {
         this.head = this.head.next;
       }
       this.size = this.size - 1;
-      return;
+      return deleteNode;
     }
     const node = this.findNode(index);
     const prev = this.findNode(index - 1);
     prev.next = node.next;
+    deleteNode = node;
     if (index === this.size - 1) {
       this.tail = prev;
     }
     this.size = this.size - 1;
+    return deleteNode;
   }
 
-  // 时间复杂度O(n)
+  /**
+   *  @param {*} data
+   *  @param {Number} index
+   *  @returns {Blockchain}
+   *  时间复杂度O(n)
+   */
+
   add(data, index) {
     const node = new Block(data);
     if (index > this.size || index < 0) {
@@ -84,9 +98,13 @@ class Blockchain {
       }
     }
     this.size = this.size + 1;
+    return this;
   }
 
-  // 时间复杂度O(n)
+  /**
+   * 时间复杂度O(n)
+   */
+
   update(data, index) {
     const node = this.findNode(index);
     node.data = data;
@@ -94,15 +112,3 @@ class Blockchain {
 }
 
 module.exports = { Blockchain, Block };
-// console.log('======================Test Inser ')
-// const node = new Blockchain()
-// node.addAtIndex(1)
-// console.log(JSON.stringify(node))
-// node.addAtIndex(2,1)
-// console.log(JSON.stringify(node))
-// node.addAtIndex(3,2)
-// console.log(JSON.stringify(node))
-// node.addAtIndex(4,3)
-// console.log(JSON.stringify(node))
-// node.addAtIndex(5,4)
-// console.log(JSON.stringify(node))

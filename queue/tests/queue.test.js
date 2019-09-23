@@ -27,7 +27,16 @@ describe('Test the queue', () => {
   });
 
   it('should store different data type to queue', () => {
-    const testCase = ['alice', true, false, 1, null, undefined, {name:'alice'}, []];
+    const testCase = [
+      'alice',
+      true,
+      false,
+      1,
+      null,
+      undefined,
+      { name: 'alice' },
+      [],
+    ];
 
     testCase.forEach((value, index) => {
       const queue = new Queue();
@@ -50,27 +59,22 @@ describe('Test the queue', () => {
   });
 
   it('should pop element from the queue', () => {
-    const queue = new Queue();
-    const tc = [1, 2, 3];
+    const queue = genQueueNatureArray(3);
 
-    tc.forEach(value => {
-      queue.push(value);
-    });
-
-    const popItem1 = queue.pop();
-    expect(popItem1).toBe(1);
+    let popItem = queue.pop();
+    expect(popItem.data).toBe(0);
     expect(queue.elements.size).toBe(2);
-    expect(queue.elements.head.data).toBe(2);
-    expect(queue.elements.tail.data).toBe(3);
+    expect(queue.elements.head.data).toBe(1);
+    expect(queue.elements.tail.data).toBe(2);
 
-    const popItem2 = queue.pop();
-    expect(popItem2).toBe(2);
+    popItem = queue.pop();
+    expect(popItem.data).toBe(1);
     expect(queue.elements.size).toBe(1);
-    expect(queue.elements.tail.data).toBe(3);
-    expect(queue.elements.head.data).toBe(3);
+    expect(queue.elements.tail.data).toBe(2);
+    expect(queue.elements.head.data).toBe(2);
 
-    const popItem3 = queue.pop();
-    expect(popItem3).toBe(3);
+    popItem = queue.pop();
+    expect(popItem.data).toBe(2);
     expect(queue.elements.size).toBe(0);
     expect(queue.elements.head).toBe(null);
     expect(queue.elements.tail).toBe(null);
@@ -83,6 +87,13 @@ describe('Test the queue', () => {
     queue.push(1);
     queue.pop();
     expect(() => queue.pop()).toThrowError('Blockchain is null');
+
+    queue.push(1);
+    queue.push(2);
+    let popItem = queue.pop();
+    expect(popItem.data).toBe(1);
+    popItem = queue.pop();
+    expect(popItem.data).toBe(2);
   });
 
   it('Test the empty function', () => {
@@ -98,12 +109,10 @@ describe('Test the queue', () => {
 
   it('should dequeue from queue in FIFO with invalid param', () => {
     const queue = genQueueNatureArray(3);
-    const popedItem = queue.pop(5);
-    expect(popedItem).toBe(0);
+    const popedItem = queue.pop(2);
+    expect(popedItem.data).toBe(0);
     expect(queue.elements.size).toBe(2);
     expect(queue.elements.head.data).toBe(1);
     expect(queue.elements.tail.data).toBe(2);
   });
-
-  
 });

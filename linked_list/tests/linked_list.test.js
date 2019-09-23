@@ -138,14 +138,16 @@ describe('Test the linked list', () => {
   it('Test the Remove func param index === 0', () => {
     const chain = new Blockchain();
     chain.add(1, 0);
-    chain.removeAtIndex(0);
+    let deleteNode = chain.removeAtIndex(0);
     expect(chain.head).toBe(null);
     expect(chain.size).toBe(0);
     expect(chain.tail).toBe(null);
+    expect(deleteNode.data).toBe(1);
 
     chain.add(1, 0);
     chain.add(2, 0);
-    chain.removeAtIndex(0);
+    deleteNode = chain.removeAtIndex(0);
+    expect(deleteNode.data).toBe(2);
     expect(chain.head.data).toBe(1);
     expect(chain.size).toBe(1);
     expect(chain.tail.data).toBe(1);
@@ -156,7 +158,8 @@ describe('Test the linked list', () => {
     chain.add(0, 0);
     chain.add(1, 1);
     chain.add(2, 2);
-    chain.removeAtIndex(2);
+    let deleteNode = chain.removeAtIndex(2);
+    expect(deleteNode.data).toBe(2);
     expect(chain.head.data).toBe(0);
     expect(chain.size).toBe(2);
     expect(chain.tail.data).toBe(1);
@@ -167,7 +170,8 @@ describe('Test the linked list', () => {
     chain.add(0, 0);
     chain.add(1, 1);
     chain.add(2, 2);
-    chain.removeAtIndex(1);
+    let deleteNode = chain.removeAtIndex(1);
+    expect(deleteNode.data).toBe(1);
     expect(chain.head.data).toBe(0);
     expect(chain.size).toBe(2);
     expect(chain.tail.data).toBe(2);

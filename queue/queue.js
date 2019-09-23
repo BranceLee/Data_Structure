@@ -19,9 +19,8 @@ class Queue {
     if (this.isEmpty()) {
       throw new Error('Blockchain is null');
     }
-    const { data } = this.elements.head;
-    this.elements.removeAtIndex(0);
-    return data;
+    // const { data } = this.elements.head;
+    return this.elements.removeAtIndex(0);
   }
 }
 

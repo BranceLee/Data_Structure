@@ -19,8 +19,12 @@ const randArrays = () => {
 
 const testCases = [
   [0],
-  [0, -1],
+  [0, 0],
   [0, 1],
+  [0, -1],
+  [0, 0, 0],
+  [0, -1, -1],
+  [0, 1, 1],
   [0, 1, 2],
   [0, -1, -1],
   [0, -1, -2],
@@ -28,6 +32,22 @@ const testCases = [
   [0, 1, -1, 2],
   [0, 1, -1, -2],
   [1, 1, -1, -2],
+  [''],
+  ['test'],
+  ['test0', 'test1'],
+  [false],
+  [true, false],
+  [undefined],
+  [undefined, undefined],
+  [undefined, undefined, undefined],
+  [null, null],
+  [null, null, null],
+  [0, undefined, undefined],
+  [0, undefined, null],
+  [0, null, null],
+  [0, true, true],
+  [0, true, false],
+  [0, true, false, false],
 ];
 
 describe('BinarySearchTree', () => {
@@ -39,12 +59,12 @@ describe('BinarySearchTree', () => {
     expect(bst.value).toBeNull();
   });
 
-  it('should insert all style param', () => {
-    const testCase = [1, 'name', true, undefined, null, [], { name: 'alice' }];
+  it('should insert number', () => {
+    const testCase = ['name', true, undefined, null, [], { name: 'alice' }];
     testCase.forEach(value => {
       const bst = new BinarySearchTreeNode();
-      bst.insert(value);
-      expect(bst.value).toBe(value);
+      const newNode = bst.insert(value);
+      expect(newNode).toBe(false);
     });
   });
 

@@ -47,6 +47,9 @@ class BinarySearchTreeNode extends BinaryTreeNode {
    * @return {BinarySearchTreeNode}
    */
   insert(value) {
+    if (typeof value !== "number"){
+      return false
+    }
     if (this.value === null) {
       this.value = value;
       return this;
